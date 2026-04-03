@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Double Pendulum Simulation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <canvas id="simulationCanvas"></canvas>
+    
+    <div id="ui-panel" class="glass-panel">
+        <h1>Double Pendulum</h1>
+        <p class="subtitle">Chaotic System Physics</p>
+        
+        <div class="control-group">
+            <label for="m1">Mass 1 (<span id="m1-val">10</span> unit)</label>
+            <input type="range" id="m1" min="1" max="50" step="1" value="10">
+        </div>
+        
+        <div class="control-group">
+            <label for="m2">Mass 2 (<span id="m2-val">10</span> unit)</label>
+            <input type="range" id="m2" min="1" max="50" step="1" value="10">
+        </div>
+        
+        <div class="control-group">
+            <label for="l1">Length 1 (<span id="l1-val">150</span> px)</label>
+            <input type="range" id="l1" min="50" max="300" step="1" value="150">
+        </div>
+        
+        <div class="control-group">
+            <label for="l2">Length 2 (<span id="l2-val">150</span> px)</label>
+            <input type="range" id="l2" min="50" max="300" step="1" value="150">
+        </div>
+
+        <div class="control-group">
+            <label for="g">Gravity (<span id="g-val">0.5</span> g)</label>
+            <input type="range" id="g" min="0" max="2" step="0.05" value="0.5">
+        </div>
+
+        <div class="control-group">
+            <label for="speed">Speed (<span id="speed-val">1.0</span>x)</label>
+            <input type="range" id="speed" min="0.1" max="10" step="0.1" value="1.0">
+        </div>
+
+        <div class="control-group">
+            <label for="theme-select">Visual Theme</label>
+            <select id="theme-select" style="width: 100%; padding: 8px; border-radius: 8px; background: rgba(0,0,0,0.4); color: white; border: 1px solid var(--glass-border); font-family: inherit; font-size: 0.9rem; margin-top: 5px; cursor: pointer; outline: none;">
+                <option value="cyberpunk">Cyberpunk (Cyan/Pink)</option>
+                <option value="matrix">The Matrix (Neon Green)</option>
+                <option value="solar">Solar Flare (Yellow/Red)</option>
+                <option value="synthwave">Synthwave (Teal/Pink)</option>
+            </select>
+        </div>
+
+        <div class="control-group" style="margin-top: 15px;">
+            <label style="margin-bottom:8px;display:block;">Trazos de Memoria (Estelas)</label>
+            <div style="display:flex; justify-content:space-between;">
+                <label style="display:flex; align-items:center; gap:8px; font-size: 0.85rem; cursor:pointer;">
+                    <input type="checkbox" id="trail1-toggle" style="accent-color: var(--mass1-color, #06b6d4);"> Masa 1
+                </label>
+                <label style="display:flex; align-items:center; gap:8px; font-size: 0.85rem; cursor:pointer;">
+                    <input type="checkbox" id="trail2-toggle" checked style="accent-color: var(--mass2-color, #e879f9);"> Masa 2
+                </label>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button id="btn-pause">Pause</button>
+            <button id="btn-reset">Reset</button>
+        </div>
+        <div class="actions" style="margin-top: 12px;">
+            <button id="btn-butterfly" style="background: rgba(139, 92, 246, 0.2); border-color: rgba(139, 92, 246, 0.4); color: #c4b5fd;">Efecto Mariposa</button>
+        </div>
+
+        <div class="control-group" id="energy-dashboard" style="margin-top: 20px;">
+            <label style="margin-bottom:8px;display:block;">Estabilizador Termodinámico (Total: <span id="energy-total">0.00</span> J)</label>
+            <div style="width:100%; height:10px; background:rgba(255,255,255,0.1); border-radius:4px; display:flex; overflow:hidden;">
+                <!-- T in Cyan, V in Magenta/Orange base -->
+                <div id="energy-t" style="height:100%; background:var(--mass1-color, #06b6d4); width:50%; transition: width 0.05s linear;" title="Energía Cinética"></div>
+                <div id="energy-v" style="height:100%; background:var(--mass2-color, #e879f9); width:50%; transition: width 0.05s linear;" title="Energía Potencial"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size: 0.75rem; color:#aaa; margin-top:5px; opacity:0.8;">
+                <span>Cinética ◄</span>
+                <span>► Potencial</span>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="phaseCanvas" width="150" height="150" style="position: absolute; bottom: 25px; right: 25px; border-radius: 12px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(5px); z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.5); pointer-events:none;" title="Phase Space (Theta1 vs Theta2)"></canvas>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

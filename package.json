@@ -1,0 +1,24 @@
+{
+  "name": "double-pendulum-chaos",
+  "version": "1.0.0",
+  "description": "Simulador interactivo del caos empleando física lagrangiana y Runge-Kutta 4.",
+  "main": "js/main.js",
+  "type": "module",
+  "scripts": {
+    "start": "npx serve -l 3000 ./",
+    "dev": "npm run start"
+  },
+  "keywords": [
+    "physics",
+    "simulation",
+    "chaos-theory",
+    "vanilla-js",
+    "rk4",
+    "educational"
+  ],
+  "author": "cazucito",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}

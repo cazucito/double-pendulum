@@ -3,7 +3,7 @@
 
 **Versión:** 1.0.0  
 **Fecha:** 2026-03-21  
-**Autor:** kaelaxiom  
+**Autor:** cazucito  
 **Estado:** Draft
 
 ---
@@ -184,6 +184,8 @@ class PendulumRenderer {
 | `input` | Slider masa 2 | `simulator.setParams({ m2: value })` |
 | `input` | Slider longitud 1 | `simulator.setParams({ L1: value })` |
 | `input` | Slider longitud 2 | `simulator.setParams({ L2: value })` |
+| `input` | Slider velocidad | `timeScale = value` |
+| `change`| Selector de Tema | `applyTheme()`: cambia variables CSS y rendering config |
 | `click` | Botón reset | `simulator.reset()` |
 | `click` | Botón pause/play | Toggle animation loop |
 
@@ -196,6 +198,7 @@ class PendulumRenderer {
 ```
 function animationLoop(timestamp):
     dt = (timestamp - lastTimestamp) / 1000  // segundos
+    dt = dt * timeScale                       // aplicar escala de velocidad
     dt = min(dt, MAX_DT)                      // clamp para estabilidad
     
     // Actualizar física
@@ -237,11 +240,16 @@ double-pendulum/
 │   └── style.css          # Estilos y layout responsivo
 ├── js/
 │   ├── main.js            # Inicialización y event loop
+│   ├── ui.js              # Controlador del DOM y Eventos
+│   ├── engine.js          # Motor Lógico y de Estado
+│   ├── themes.js          # Base de datos visual y gestor de estilos
 │   ├── pendulum.js        # Clase PendulumSimulator
 │   ├── renderer.js        # Clase PendulumRenderer
 │   └── utils.js           # Helper functions (RK4, etc.)
 ├── docs/
 │   ├── SDD.md             # Este documento
+│   ├── ARCHITECTURE.md    # Arquitectura detallada del Software
+│   ├── PHYSICS_MATH.md    # Ecuaciones físicas y matemáticas
 │   └── README.md          # Guía de usuario
 └── assets/                # (vacío por ahora)
 ```
@@ -295,7 +303,17 @@ double-pendulum/
 
 ---
 
-## 11. Historial de Cambios
+## 11. Roadmap de Funcionalidades (Evolución)
+
+1. **Efecto Mariposa (Clones)**: Instanciación múltiple del péndulo con diferencias microscópicas `(0.0001 rad)` en sus condiciones iniciales para visualizar el caos divergente.
+2. **Manipulación Interactiva**: Interfaz drag & drop para reubicar las masas libremente usando el cursor o gestos táctiles.
+3. **Phase Space Graph**: Un panel extra renderizado en canvas para mapear parámetros como `Theta_1 vs Theta_2` evidenciando atractores del caos.
+4. **Conservación de Energía**: Componente UI dinámico que suma visualmente Energía Cinética y Potencial para confirmar la fidelidad matemática del algoritmo de integración.
+5. **Estéticas y Temas Visuales (Implementado)**: Filtros y modos de composición global (e.g. `screen`, `lighter`) acompañados de selectores de paleta de color (e.g., *Cyberpunk*, *Matrix*, *Solar Flare*, *Synthwave*) que modifican las variables CSS del fondo global y los colores estelares en el Canvas para arte generativo.
+
+---
+
+## 12. Historial de Cambios
 
 | Versión | Fecha | Autor | Cambios |
 |---------|-------|-------|---------|
