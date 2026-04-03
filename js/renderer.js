@@ -38,7 +38,13 @@ export class PendulumRenderer {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
         this.originX = this.canvas.width / 2;
-        this.originY = this.canvas.height / 3; 
+        
+        // En móviles/tablets (ancho <= 768), subimos el origen para dejar espacio al panel inferior.
+        if (window.innerWidth <= 768) {
+            this.originY = this.canvas.height / 5;
+        } else {
+            this.originY = this.canvas.height / 3;
+        }
     }
 
     clear() {

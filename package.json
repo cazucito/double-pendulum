@@ -1,6 +1,6 @@
 {
   "name": "double-pendulum-chaos",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Simulador interactivo del caos empleando física lagrangiana y Runge-Kutta 4.",
   "main": "js/main.js",
   "type": "module",

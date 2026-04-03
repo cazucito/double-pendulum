@@ -318,3 +318,29 @@ double-pendulum/
 | Versión | Fecha | Autor | Cambios |
 |---------|-------|-------|---------|
 | 1.0.0 | 2026-03-21 | kaelaxiom | Especificación inicial |
+| 1.1.0 | 2026-04-03 | Antigravity | Especificaciones de responsividad móvil |
+
+---
+
+## 13. Adaptación para Dispositivos Móviles
+
+Para garantizar una experiencia óptima en teléfonos y tablets (especialmente en orientación vertical), se implementan los siguientes ajustes:
+
+### 13.1 Layout de Interfaz (CSS)
+- **Umbral de resolución:** 768px (pantallas pequeñas y tablets).
+- **Panel de UI (`#ui-panel`):**
+  - Se transforma de un panel flotante lateral a un "Bottom Sheet" anclado al borde inferior.
+  - Ancho: 100%.
+  - Altura máxima: 45vh (45% del alto del viewport).
+  - Scroll vertical interno habilitado para acceder a todos los parámetros.
+  - Bordes redondeados únicamente en las esquinas superiores (`20px 20px 0 0`).
+- **Phase Space Canvas (`#phaseCanvas`):**
+  - Se integra dentro del panel de controles inferior (`#ui-panel`) como un componente desplazable (inline) para mantener la visibilidad sin interferir con la simulación principal.
+
+### 13.2 Ajustes Visuales (Renderer)
+- **Punto de anclaje dinámico:**
+  - En móviles, el origen del péndulo (`originY`) se desplaza hacia la parte superior (`height / 4` o `height / 5`) para evitar que el movimiento de las masas ocurra detrás del panel de controles inferior.
+
+### 13.3 Interacción Táctil
+- **Viewport Meta Tag:**
+  - Configurado como `width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no` para prevenir el zoom accidental al interactuar rápidamente con los controles táctiles.

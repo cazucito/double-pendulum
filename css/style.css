@@ -73,6 +73,7 @@ h1 {
     margin-bottom: 4px;
     background: linear-gradient(135deg, #22d3ee, #818cf8, #e879f9);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -0.02em;
 }
@@ -106,6 +107,7 @@ h1 {
 /* Custom Range Input */
 input[type=range] {
     -webkit-appearance: none;
+    appearance: none;
     width: 100%;
     background: transparent;
 }
@@ -173,4 +175,64 @@ button:active {
     background: rgba(244, 63, 94, 0.15);
     border-color: rgba(244, 63, 94, 0.3);
     color: #fda4af;
+}
+
+/* Phase Space Canvas (Theta1 vs Theta2) */
+#phaseCanvas {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    pointer-events: none;
+}
+
+/* Responsividad para Móviles y Tablets */
+@media (max-width: 768px) {
+    .glass-panel {
+        top: auto;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        max-height: 45vh;
+        overflow-y: auto;
+        border-radius: 24px 24px 0 0;
+        padding: 20px;
+        box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+        transform: translateY(0); /* Evitar transformaciones raras en móviles */
+    }
+
+    .glass-panel:hover {
+        transform: none;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    .subtitle {
+        margin-bottom: 20px;
+    }
+
+    .actions {
+        margin-top: 24px;
+    }
+
+    /* Mostrar el gráfico de fase dentro del panel desplazable en móviles */
+    #phaseCanvas {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        margin: 20px auto 0;
+        display: block;
+        width: 140px;
+        height: 140px;
+        border: 1px solid rgba(255,255,255,0.2);
+    }
 }
